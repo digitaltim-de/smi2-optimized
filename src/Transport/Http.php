@@ -700,7 +700,11 @@ class Http
         $response = new Statement($request);
         if ($exception) {
             if ($response->isError()) {
-                $response->error();
+                if(function_exists('dd')) {
+                    dd($response->getRequest()->response()->body());
+                }
+                print_r($response->getRequest()->response()->body());
+                exit;
             }
         }
         return $response;

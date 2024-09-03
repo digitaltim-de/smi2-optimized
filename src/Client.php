@@ -500,7 +500,7 @@ class Client
      * @return Statement
      * @throws Exception\TransportException
      */
-    public function insert(string $table, array $values, array $columns = []): Statement
+    public function insert(string $table, array $values, array $columns = [], $debug = false): Statement
     {
         if (empty($values)) {
             throw QueryException::cannotInsertEmptyValues();
@@ -522,7 +522,7 @@ class Client
         }
         $sql = trim($sql, ', ');
 
-        return $this->transport()->write($sql);
+        return $this->transport()->write($sql, [], $debug);
     }
 
     /**
